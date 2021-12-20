@@ -1,14 +1,14 @@
-## userテーブル
+## usersテーブル
 
 | Column             | Type   | Options                   |
 | ------------------ | ------ | ------------------------- |
 | nickname           | string | null: false               |
 | email              | string | null: false, unique: true |
 | encrypted_password | string | null: false |
-| kanji_name         | string | null: false |
-| kana_name          | string | null: false |
-| birth_year         | date   | null: false |
-| birth_month        | date   | null: false |
+| kanji_first_name   | string | null: false |
+| kanji_last_name    | string | null: false |
+| kana_first_name    | string | null: false |
+| kana_last_name     | string | null: false |
 | birth_day          | date   | null: false |
 
 ### Association
@@ -35,7 +35,7 @@
 - has_one :purchase_record
 
 
-## purchase_recordテーブル
+## purchase_recordsテーブル
 
 | Column   | Type       | Options                        |
 | -------- | ---------- | ------------------------------ |
@@ -43,11 +43,12 @@
 | item  | references | null: false, foreign_key: true |
 
 ### Association
-- has_one :uer
-- has_one :item
+- belongs_to :uer
+- belongs_to :item
+- belongs_to :buyer
 
 
-## buyerテーブル
+## buyersテーブル
 
 | Column         | Type    | Options                   |
 | -------------- | ------- | ------------------------- |
@@ -56,7 +57,8 @@
 | municipalities | string  | null: false |
 | address        | string  | null: false |
 | building       | string  |             |
-| phone_number   | string  | null: false, unique: true |
+| phone_number   | string  | null: false |
+| purchase_record | references | null: false, foreign_key: true |
 
 ### Association
-- has_many :purchase_record
+- has_one :purchase_record
