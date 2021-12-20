@@ -1,24 +1,61 @@
-# README
+## userテーブル
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+| Column             | Type   | Options                   |
+| ------------------ | ------ | ------------------------- |
+| nickname           | string | null: false, unique: true |
+| email              | string | null: false, unique: true |
+| encrypted_password | string | null: false |
+| kanji_name         | string | null: false |
+| kana_name          | string | null: false |
+| birthday           | date   | null: false |
 
-Things you may want to cover:
+### Association
+- has_many :item
+- has_one :purchase_record
 
-* Ruby version
 
-* System dependencies
+## itemsテーブル
 
-* Configuration
+| Column        | Type    | Options     |
+| ------------- | ------- | ----------- |
+| item_name     | string  | null: false |
+| item_detail   | text    | null: false |
+| category      | string  | null: false |
+| condition     | string  | null: false |
+| shipping_fee  | integer | null: false |
+| shipping_from | string  | null: false |
+| shipping_days | integer | null: false |
+| price         | integer | null: false |
 
-* Database creation
+### Association
+- belongs_to :user
+- has_one :purchase_record
 
-* Database initialization
 
-* How to run the test suite
+## purchase_recordテーブル
 
-* Services (job queues, cache servers, search engines, etc.)
+| Column   | Type       | Options                        |
+| -------- | ---------- | ------------------------------ |
+| user_id  | references | null: false, foreign_key: true |
+| item_id  | references | null: false, foreign_key: true |
+| buyer_id | references | null: false, foreign_key: true |
 
-* Deployment instructions
+### Association
+- has_one :uer
+- has_one :item
+- has_one :buyer
 
-* ...
+
+## buyerテーブル
+
+| Column         | Type    | Options                   |
+| -------------- | ------- | ------------------------- |
+| postal_code    | integer | null: false |
+| prefectures    | string  | null: false |
+| municipalities | string  | null: false |
+| address        | string  | null: false |
+| building       | string  | null: false |
+| phone_number   | integer | null: false, unique: true |
+
+### Association
+- has_one :purchase_record
