@@ -2,30 +2,33 @@
 
 | Column             | Type   | Options                   |
 | ------------------ | ------ | ------------------------- |
-| nickname           | string | null: false, unique: true |
+| nickname           | string | null: false               |
 | email              | string | null: false, unique: true |
 | encrypted_password | string | null: false |
 | kanji_name         | string | null: false |
 | kana_name          | string | null: false |
-| birthday           | date   | null: false |
+| birth_year         | date   | null: false |
+| birth_month        | date   | null: false |
+| birth_day          | date   | null: false |
 
 ### Association
-- has_many :item
-- has_one :purchase_record
+- has_many :items
+- has_many :purchase_records
 
 
 ## itemsテーブル
 
-| Column        | Type    | Options     |
-| ------------- | ------- | ----------- |
-| item_name     | string  | null: false |
-| item_detail   | text    | null: false |
-| category      | string  | null: false |
-| condition     | string  | null: false |
-| shipping_fee  | integer | null: false |
-| shipping_from | string  | null: false |
-| shipping_days | integer | null: false |
-| price         | integer | null: false |
+| Column           | Type    | Options     |
+| ---------------- | ------- | ----------- |
+| item_name        | string  | null: false |
+| item_detail      | text    | null: false |
+| category_id      | integer | null: false |
+| condition_id     | integer | null: false |
+| shipping_fee_id  | integer | null: false |
+| prefectures_id   | integer | null: false |
+| shipping_days_id | integer | null: false |
+| price            | integer | null: false |
+| user          | references | null: false, foreign_key: true |
 
 ### Association
 - belongs_to :user
@@ -36,26 +39,24 @@
 
 | Column   | Type       | Options                        |
 | -------- | ---------- | ------------------------------ |
-| user_id  | references | null: false, foreign_key: true |
-| item_id  | references | null: false, foreign_key: true |
-| buyer_id | references | null: false, foreign_key: true |
+| user  | references | null: false, foreign_key: true |
+| item  | references | null: false, foreign_key: true |
 
 ### Association
 - has_one :uer
 - has_one :item
-- has_one :buyer
 
 
 ## buyerテーブル
 
 | Column         | Type    | Options                   |
 | -------------- | ------- | ------------------------- |
-| postal_code    | integer | null: false |
-| prefectures    | string  | null: false |
+| postal_code    | string  | null: false |
+| prefectures_id | integer | null: false |
 | municipalities | string  | null: false |
 | address        | string  | null: false |
-| building       | string  | null: false |
-| phone_number   | integer | null: false, unique: true |
+| building       | string  |             |
+| phone_number   | string  | null: false, unique: true |
 
 ### Association
-- has_one :purchase_record
+- has_many :purchase_record
