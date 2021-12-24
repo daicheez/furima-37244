@@ -5,10 +5,8 @@ class Item < ApplicationRecord
 
   validates :item_name, :item_detail, presence: true
   validates :category_id, :condition_id, :shipping_fee_id, :prefecture_id, :shipping_day_id, numericality: { other_than: 1, message: "can't be blank" } 
-  validates :price, presence: true, format: {
-    with: /\A[0-9]+\z/
-  }
+  validates :price, presence: true, numericality: { in: 300..9999999 }, format: { with: /\A[0-9]+\z/ }
 
   extend ActiveHash::Associations::ActiveRecordExtensions
-  belongs_to :genre
+  belongs_to :category, :condition, :shipping_fee, :prefecture, :shipping_day
 end
