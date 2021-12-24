@@ -1,12 +1,15 @@
 FactoryBot.define do
   factory :item do
-    item_name              { Faker::Name.name }
-    item_detail                 { Faker::Internet.free_email }
-    category { password }
-    first_name            { person.first.kanji }
-    last_name             { person.last.kanji }
-    first_name_kana       { person.first.katakana }
-    last_name_kana        { person.last.katakana }
-    birth_day             { Faker::Date.between(from: '1930-1-1', to: '2016-12-31') }
+    transient do
+      gimei { Gimei.name }
+    end
+    item_name       { gimei.kanji }
+    item_detail     { '詳細です。' + Faker::Lorem.sentence }
+    category_id     { 2 }
+    condition_id    { 2 }
+    shipping_fee_id { 2 }
+    prefecture_id   { 2 }
+    shipping_day_id { 2 }
+    price           { Faker::Number.between(from: 300, to: 9999999) }
   end
 end
