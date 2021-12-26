@@ -10,8 +10,7 @@ class Item < ApplicationRecord
             presence: true,
             numericality: {
               only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999
-            },
-            format: { with: /\A[0-9]+\z/ }
+            }
 
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :category, :condition, :shipping_fee, :prefecture, :shipping_day
