@@ -55,6 +55,21 @@ RSpec.describe OrderBuyer, type: :model do
         @order_buyer.valid?
         expect(@order_buyer.errors.full_messages).to include('Phone number is invalid. input only number')
       end
+      it 'userが紐付いていないと保存できないこと' do
+        @order_buyer.user_id = nil
+        @order_buyer.valid?
+        expect(@order_buyer.errors.full_messages).to include("User can't be blank")
+      end
+      it 'itemが紐付いていないと保存できないこと' do
+        @order_buyer.item_id = nil
+        @order_buyer.valid?
+        expect(@order_buyer.errors.full_messages).to include("Item can't be blank")
+      end
+      it "tokenが空では登録できないこと" do
+        @order_buyer.token = nil
+        @order_buyer.valid?
+        expect(@order_buyer.errors.full_messages).to include("Token can't be blank")
+      end
     end
   end
 end
