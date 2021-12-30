@@ -4,6 +4,7 @@ class OrderBuyer
   with_options presence: true do
     validates :item_id
     validates :user_id
+    validates :token
     validates :city
     validates :address
     validates :phone_number, numericality: {
