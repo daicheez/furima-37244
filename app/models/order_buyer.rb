@@ -9,7 +9,7 @@ class OrderBuyer
     validates :city
     validates :address
     validates :phone_number, numericality: {
-      with: /\A\d{10,11}\z/,
+      only_integer: true,
       message: 'is invalid. input only number'
     }
     validates :postal_code, format: {
@@ -18,6 +18,7 @@ class OrderBuyer
     }
   end
   validates :prefecture_id, numericality: { other_than: 1, message: "can't be blank" }
+  validates :phone_number, length: { minimum: 10, maximum: 11 }
 
   def save
     order = Order.create(item_id: item_id, user_id: user_id)

@@ -59,12 +59,12 @@ RSpec.describe OrderBuyer, type: :model do
       it 'phone_numberは9桁以下では保存できないこと' do
         @order_buyer.phone_number = '123456789'
         @order_buyer.valid?
-        expect(@order_buyer.errors.full_messages).to include()
+        expect(@order_buyer.errors.full_messages).to include('Phone number is too short (minimum is 10 characters)')
       end
       it 'phone_numberは12桁以上では保存できないこと' do
         @order_buyer.phone_number = '123456789012'
         @order_buyer.valid?
-        expect(@order_buyer.errors.full_messages).to include()
+        expect(@order_buyer.errors.full_messages).to include('Phone number is too long (maximum is 11 characters)')
       end
       it 'userが紐付いていないと保存できないこと' do
         @order_buyer.user_id = nil
