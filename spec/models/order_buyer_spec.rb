@@ -56,6 +56,16 @@ RSpec.describe OrderBuyer, type: :model do
         @order_buyer.valid?
         expect(@order_buyer.errors.full_messages).to include('Phone number is invalid. input only number')
       end
+      it 'phone_numberは9桁以下では保存できないこと' do
+        @order_buyer.phone_number = '123456789'
+        @order_buyer.valid?
+        expect(@order_buyer.errors.full_messages).to include()
+      end
+      it 'phone_numberは12桁以上では保存できないこと' do
+        @order_buyer.phone_number = '123456789012'
+        @order_buyer.valid?
+        expect(@order_buyer.errors.full_messages).to include()
+      end
       it 'userが紐付いていないと保存できないこと' do
         @order_buyer.user_id = nil
         @order_buyer.valid?
