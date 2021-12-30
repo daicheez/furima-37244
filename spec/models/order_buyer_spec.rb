@@ -23,7 +23,8 @@ RSpec.describe OrderBuyer, type: :model do
       it 'postal_codeが空だと保存できないこと' do
         @order_buyer.postal_code = ''
         @order_buyer.valid?
-        expect(@order_buyer.errors.full_messages).to include("Postal code can't be blank", "Postal code is invalid. Enter it as follows (e.g. 123-4567)")
+        expect(@order_buyer.errors.full_messages).to include("Postal code can't be blank",
+                                                             'Postal code is invalid. Enter it as follows (e.g. 123-4567)')
       end
       it 'postal_codeが半角のハイフンを含んだ正しい形式でないと保存できないこと' do
         @order_buyer.postal_code = '1234567'
@@ -65,7 +66,7 @@ RSpec.describe OrderBuyer, type: :model do
         @order_buyer.valid?
         expect(@order_buyer.errors.full_messages).to include("Item can't be blank")
       end
-      it "tokenが空では登録できないこと" do
+      it 'tokenが空では登録できないこと' do
         @order_buyer.token = nil
         @order_buyer.valid?
         expect(@order_buyer.errors.full_messages).to include("Token can't be blank")
