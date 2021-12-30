@@ -8,7 +8,7 @@ class OrderBuyer
     validates :address
     validates :phone_number, numericality: {
                                             with: /\A\d{10,11}\z/,
-                                            message: 'is invalid.input only number'
+                                            message: 'is invalid. input only number'
                                           }
     validates :postal_code, format: {
                                       with: /\A[0-9]{3}-[0-9]{4}\z/, 
