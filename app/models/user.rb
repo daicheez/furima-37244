@@ -1,7 +1,10 @@
 class User < ApplicationRecord
   has_many :items
+  has_many :orders
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+
   validates :nickname, :birth_day, presence: true
   validates :first_name, :last_name, presence: true, format: {
     with: /\A[ぁ-んァ-ヶ一-龥々ー]+\z/
